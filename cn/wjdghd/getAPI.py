@@ -4,7 +4,7 @@ from cn.wjdghd.ReadCityNameForList import get_all
 from cn.wjdghd.getTime import get_time
 
 time = str(get_time())
-f = open(time + '_PM.csv', 'w', encoding='GBK')
+f = open('../'+time + '_PM.csv', 'w', encoding='GBK')
 url = 'http://www.pm25.in/'
 cityName = ''
 lis = get_all()
@@ -28,9 +28,9 @@ for each in lis:
     while i < length - 1:
         temp = AQI[i]
         value = str(temp.find_all('div', {'class': 'value'})[0].get_text()).replace(' ', '', 10000)
-        value=value.replace('\n', '',10000).replace('\r\n\r\n',''r'n',10000)
+        value=value.replace('\n', '',10000).replace('\r\n\r\n', '\r\n', 10000)
         caption = str(temp.find_all('div', {'class': 'caption'})[0].get_text()).replace(' ', '', 10000)
-        caption=caption.replace('\n', '',10000).replace('\r\n\r\n',''r'n',10000)
+        caption=caption.replace('\n', '',10000).replace('\r\n\r\n', '\r\n', 10000)
         averInfo[caption] = value
         i += 1
     table = b.select('tr')
