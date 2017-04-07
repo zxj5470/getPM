@@ -3,6 +3,7 @@ import os
 from bs4 import BeautifulSoup
 from ReadCityNameForList import get_all
 from getTime import get_time
+
 try:
     time = str(get_time())
     name = str('../temp_' + time + '_PM.csv')
