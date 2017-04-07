@@ -10,8 +10,7 @@ for i in f_list:
             f2 = open('../New'+str(i), 'wb')
             all_the_text = f.read()
             strall = str(all_the_text, encoding='gbk')
-            strall = strall.replace("\r\n", "", 100000000).replace('\r\r', '\r', 100000000).replace('  ', '',
-                                                                                                    100000000)
+            strall = strall.replace("\n", "", 100000000).replace("\r\n", "", 100000000).replace('  ', '',100000000).replace('\r\r', '\r', 100000000)
             f2.write(bytes(strall, encoding='gbk'))
         finally:
             f.close()
