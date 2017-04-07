@@ -1,7 +1,7 @@
 import csv
 
-def get_all(rowNumber=0):
 
+def get_all(rowNumber=0):
     cityNameList = {}
     with open('cityNameList.txt', 'r', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
@@ -10,4 +10,3 @@ def get_all(rowNumber=0):
             cityNameList[i] = row[rowNumber]
             i += 1
     return cityNameList
-

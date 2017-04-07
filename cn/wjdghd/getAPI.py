@@ -1,10 +1,12 @@
 import requests
+import os
 from bs4 import BeautifulSoup
 from cn.wjdghd.ReadCityNameForList import get_all
 from cn.wjdghd.getTime import get_time
 
 time = str(get_time())
-f = open('../'+time + '_PM.csv', 'w', encoding='GBK')
+name = str('../temp_' + time + '_PM.csv')
+f = open(name, 'w', encoding='GBK')
 url = 'http://www.pm25.in/'
 cityName = ''
 lis = get_all()
@@ -28,9 +30,9 @@ for each in lis:
     while i < length - 1:
         temp = AQI[i]
         value = str(temp.find_all('div', {'class': 'value'})[0].get_text()).replace(' ', '', 10000)
-        value=value.replace('\n', '',10000).replace('\r\n\r\n', '\r\n', 10000)
+        value = value.replace('\n', '', 10000).replace('\r\n\r\n', '\r\n', 10000)
         caption = str(temp.find_all('div', {'class': 'caption'})[0].get_text()).replace(' ', '', 10000)
-        caption=caption.replace('\n', '',10000).replace('\r\n\r\n', '\r\n', 10000)
+        caption = caption.replace('\n', '', 10000).replace('\r\n\r\n', '\r\n', 10000)
         averInfo[caption] = value
         i += 1
     table = b.select('tr')
@@ -77,3 +79,14 @@ for each in lis:
             f.write(str(list[eachCon][eachOne]) + ',')
     f.write('\r')
 f.close()
+f = open(name, 'rb')
+f2 = open('../' + time + '_PM.csv', 'wb')
+try:
+    all_the_text = f.read()
+    strall = str(all_the_text, encoding='gbk')
+    strall = strall.replace("\r\n", "", 100000000).replace('\r\r', '\r', 100000000).replace('  ', '', 100000000)
+    f2.write(bytes(strall, encoding='gbk'))
+finally:
+    f.close()
+    os.remove(name)
+    f2.close()
