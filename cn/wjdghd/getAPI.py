@@ -1,8 +1,8 @@
 import requests
 import os
 from bs4 import BeautifulSoup
-from cn.wjdghd.ReadCityNameForList import get_all
-from cn.wjdghd.getTime import get_time
+from ReadCityNameForList import get_all
+from getTime import get_time
 
 time = str(get_time())
 name = str('../temp_' + time + '_PM.csv')
@@ -88,5 +88,5 @@ try:
     f2.write(bytes(strall, encoding='gbk'))
 finally:
     f.close()
-    # os.remove(name)
+    os.remove(name)
     f2.close()
