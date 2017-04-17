@@ -1,12 +1,13 @@
-#coding :utf-8
+# coding :utf-8
 import requests
 import os
 from bs4 import BeautifulSoup
 from ReadCityNameForList import get_all
 from getTime import get_time
+
 time = str(get_time())
 name = str('../temp_' + time + '_PM.csv')
-f = open(name, 'w', encoding='GBK')
+f = open(name, 'wb')
 try:
     url = 'http://www.pm25.in/'
     cityName = ''
@@ -55,7 +56,7 @@ try:
                 i += 1
             flag = 1
             for eachrow in captionList:
-                f.write(str(captionList[eachrow]) + ',')
+                f.write(bytes(str(captionList[eachrow]) + ',', encoding='GBK'))
         i = 1
         while i < inl:
             trLength = table[i].select('td')
@@ -75,10 +76,10 @@ try:
             list[i] = valueList
             i += 1
         for eachCon in list:
-            f.write('\r')
+            f.write(bytes('\r', encoding='GBK'))
             for eachOne in list[eachCon]:
-                f.write(str(list[eachCon][eachOne]) + ',')
-        f.write('\r')
+                f.write(bytes(str(list[eachCon][eachOne]) + ',', encoding='GBK'))
+        f.write(bytes('\r', encoding='GBK'))
 finally:
     f.close()
 
@@ -87,9 +88,9 @@ f2 = open('../' + time + '_PM.csv', 'wb')
 try:
     all_the_text = f.read()
     strall = str(all_the_text, encoding='gbk')
-    strall = strall.replace("\r\n", "", 100000000).replace('\r\r', '\r', 100000000).replace('  ', '', 100000000)
+    strall = strall.replace("\r\n", "", 100000000).replace('\r\r', '\r', 100000000).replace('  ', '', 100000000).replace('\n','',100000000)
     f2.write(bytes(strall, encoding='gbk'))
 finally:
     f.close()
-    os.remove(name)
+    # os.remove(name)
     f2.close()
