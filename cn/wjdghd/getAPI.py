@@ -4,11 +4,10 @@ import os
 from bs4 import BeautifulSoup
 from ReadCityNameForList import get_all
 from getTime import get_time
-
+time = str(get_time())
+name = str('../temp_' + time + '_PM.csv')
+f = open(name, 'w', encoding='GBK')
 try:
-    time = str(get_time())
-    name = str('../temp_' + time + '_PM.csv')
-    f = open(name, 'w', encoding='GBK')
     url = 'http://www.pm25.in/'
     cityName = ''
     lis = get_all()
@@ -82,9 +81,10 @@ try:
         f.write('\r')
 finally:
     f.close()
+
+f = open(name, 'rb')
+f2 = open('../' + time + '_PM.csv', 'wb')
 try:
-    f = open(name, 'rb')
-    f2 = open('../' + time + '_PM.csv', 'wb')
     all_the_text = f.read()
     strall = str(all_the_text, encoding='gbk')
     strall = strall.replace("\r\n", "", 100000000).replace('\r\r', '\r', 100000000).replace('  ', '', 100000000)
