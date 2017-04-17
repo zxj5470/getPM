@@ -92,5 +92,5 @@ try:
     f2.write(bytes(strall, encoding='gbk'))
 finally:
     f.close()
-    # os.remove(name)
+    os.remove(name)
     f2.close()
