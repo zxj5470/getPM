@@ -2,7 +2,7 @@
 import os
 
 f_list = os.listdir('../')
-os.mkdir('New')
+os.mkdir('../New')
 for i in f_list:
     if os.path.splitext(i)[1] == '.csv':
         print(str(i))
